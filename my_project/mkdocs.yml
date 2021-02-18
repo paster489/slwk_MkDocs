@@ -1,4 +1,4 @@
-site_name: BGU HPC Slurm Cluster (Rev.0)
+site_name: BGU HPC Slurm Cluster (Rev.1)
 nav:
         - Overview: index.md
         - Connection to HPC Slurm: connection.md
