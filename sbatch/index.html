@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>SBATCH - BGU HPC Slurm Cluster (Rev.0)</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link href="../stylesheets/extra.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "SBATCH";
+    var mkdocs_page_input_path = "sbatch.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> BGU HPC Slurm Cluster (Rev.0)</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Overview</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../connection/">Connection to HPC Slurm</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">SBATCH</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#example-of-sbatch-submition-script-batch-file">Example of SBatch Submition Script (Batch File):</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#additional-flags-description">Additional Flags' Description</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#submit-job">Submit Job</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#cancel-job">Cancel Job</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#view-job-id-and-its-status">View Job ID and it's Status</a>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../srun/">SRUN</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../commands/">Commands</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../jupyter/">Jupyter</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../pyCharm/">pyCharm</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../matlab/">Matlab</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../conda_env/">Conda Environment</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../rstudio/">RStudio</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../faq/">FAQ</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../contact/">Contact</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">BGU HPC Slurm Cluster (Rev.0)</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>SBATCH</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="sbatch">SBATCH</h1>
+<p>The syntax for the SLURM directive in a script is  "<span style="color:purple">#SBATCH</span> &lt; flag &gt;".  Some of the flags are used with the srun and salloc commands, as well as the fisbatch wrapper script for interactive jobs. Sbatch configuration parameters must start with #SBATCH and must precede any other command.
+  <span style="color:purple">#SBATCH</span> - Bash "sees" this as comment.<br/>
+  <span style="color:purple">#SBATCH</span> - Slurm "takes" this as parameter. <br />
+  Use ## to close <span style="color:purple">#SBATCH</span> as comment.<br/></p>
+<h3 id="example-of-sbatch-submition-script-batch-file">Example of SBatch Submition Script (Batch File):</h3>
+<p><strong>NOTE</strong>: the term "Batch File" is used throughout this documentation to mean an executable file that you create and submit to the job scheduler to run on a node or collection of nodes.  This script will include a list of Slurm directives (or commands) to tell the job scheduler what to do.  </p>
+<p><img alt="Screenshot" src="../img/sbatch_example.png" /></p>
+<h3 id="additional-flags-description">Additional Flags' Description</h3>
+<table>
+<thead>
+<tr>
+<th align="left"><strong>Flag</strong> <div style="width:350px">property</div></th>
+<th align="left"><strong>Description</strong> <div style="width:100px">property</div></th>
+<th align="left"><strong>Default</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><span style="color:purple">#SBATCH</span> --<span style="color:red">partition</span>=<ins>TBD</ins></td>
+<td align="left">Partition name.</td>
+<td align="left"><ins>TBD</ins></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><span style="color:purple">#SBATCH</span> --<span style="color:red">time</span>=0-12:00:00</td>
+<td align="left">Limit the time of job running. Format: D-H:MM:SS.</td>
+<td align="left"><ins>TBD</ins></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><span style="color:purple">#SBATCH</span> --<span style="color:red">job-name</span>=my_job</td>
+<td align="left">Name of the job. Replace my_job with your desired job name.</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><span style="color:purple">#SBATCH</span> --<span style="color:red">output</span>=%a_my_name-%J.out</td>
+<td align="left">Output log for running job, %J – job #, %a – run #.</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><span style="color:purple">#SBATCH</span> --<span style="color:red">mail-user</span>=<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#58;&#117;&#115;&#101;&#114;&#110;&#97;&#109;&#101;&#64;&#112;&#111;&#115;&#116;&#46;&#98;&#103;&#117;&#46;&#97;&#99;&#46;&#105;&#108;">&#117;&#115;&#101;&#114;&#110;&#97;&#109;&#101;&#64;&#112;&#111;&#115;&#116;&#46;&#98;&#103;&#117;&#46;&#97;&#99;&#46;&#105;&#108;</a></td>
+<td align="left">Users email for sending job status notifications.</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><span style="color:purple">#SBATCH</span> --<span style="color:red">mail-type</span>=BEGIN,END,FAIL</td>
+<td align="left">Conditions when to send the email. ALL,BEGIN,END,FAIL, REQUEU, NONE.</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><span style="color:purple">#SBATCH</span> --<span style="color:red">nodelist</span>=<ins>TBD</ins></td>
+<td align="left">Specify the computer to run the job.</td>
+<td align="left"><ins>TBD</ins></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><span style="color:purple">#SBATCH</span> --<span style="color:red">array</span>=1-10</td>
+<td align="left">Run parallel 10 times.</td>
+<td align="left"><ins>TBD</ins></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><span style="color:purple">#SBATCH</span> --<span style="color:red">mem</span>=72G</td>
+<td align="left">Allocate extra memory.</td>
+<td align="left"><ins>TBD</ins></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><span style="color:purple">#SBATCH</span> --<span style="color:red">gres</span>=gpu:1</td>
+<td align="left">Number of GPUs (can't exceed 8 gpus for now) ask for more than 1 only if you can parallelize your code for multi GPU.</td>
+<td align="left"><ins>TBD</ins></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><span style="color:purple">#SBATCH</span> --<span style="color:red">nodes</span>=1-1</td>
+<td align="left">Allocate 1 node.</td>
+<td align="left"><ins>TBD</ins></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><span style="color:purple">#SBATCH</span> --<span style="color:red">ntasks</span>=12</td>
+<td align="left">Allocate 12 tasks</td>
+<td align="left"><ins>TBD</ins></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><span style="color:purple">#SBATCH</span> --<span style="color:red">cpus-per-task</span>=32</td>
+<td align="left">Allocate extra CPU: 32 CPU per task.</td>
+<td align="left"><ins>TBD</ins></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><span style="color:purple">#SBATCH</span> --<span style="color:red">requeue</span>=32</td>
+<td align="left">Re-run the task if it was preempted.</td>
+<td align="left"><ins>TBD</ins></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><span style="color:purple">#SBATCH</span> --<span style="color:red">dependency</span>=after(ok/notok/any):<job_ids></td>
+<td align="left">Ordering of jobs.</td>
+<td align="left"><ins>TBD</ins></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><span style="color:purple">#SBATCH</span> --<span style="color:red">exclusive</span>=<user></td>
+<td align="left">To reserve a whole node for yourself, slurm will reserve a full node for the first job to start in the array, and then will schedule all the others on the same machine as only your jobs will be allowed there.</td>
+<td align="left"><ins>TBD</ins></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><span style="color:purple">#SBATCH</span> <span style="color:red">%j</span></td>
+<td align="left">Job #.</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><span style="color:purple">#SBATCH</span> <span style="color:red">%A</span></td>
+<td align="left">Value of SLURM_ARRAY_JOB_ID.</td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left"><span style="color:purple">#SBATCH</span> <span style="color:red">%a</span></td>
+<td align="left">Value of SLURM_ARRAY_TASK_ID.</td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="submit-job">Submit Job</h3>
+<div class="highlight"><pre><span></span><code>$ sbatch &lt;path-to-file&gt;/&lt;sbatch-file-name&gt;
+</code></pre></div>
+<p>If you have QOS privileges, you can use:</p>
+<div class="highlight"><pre><span></span><code>$ sbatch --qos=&lt;priority-user-name&gt; &lt;path-to-file&gt;/&lt;sbatch-file-name&gt;
+</code></pre></div>
+<p>After job submission, Slurm gives the JobID, to see it use:</p>
+<div class="highlight"><pre><span></span><code>$ ls -lrt
+</code></pre></div>
+<h3 id="cancel-job">Cancel Job</h3>
+<p>Cancel the specific job:</p>
+<div class="highlight"><pre><span></span><code>$ scancel &lt;job-id&gt;
+</code></pre></div>
+<p>or</p>
+<div class="highlight"><pre><span></span><code>$ scancel --name &lt;job-name&gt;
+</code></pre></div>
+<p>Cancel all jobs of the user:</p>
+<div class="highlight"><pre><span></span><code>$ scancel -u&lt;user-name&gt;
+or
+$ scancel -u$USER
+</code></pre></div>
+<p>Cancel pending jobs of the user:</p>
+<div class="highlight"><pre><span></span><code>$ scancel -t PENDING -u &lt;user-name&gt;
+</code></pre></div>
+<h3 id="view-job-id-and-its-status">View Job ID and it's Status</h3>
+<div class="highlight"><pre><span></span><code>$ squeue -l -u$USER
+</code></pre></div>
+<p>or  </p>
+<div class="highlight"><pre><span></span><code>$ squeue -l -u&lt;user-name&gt;
+</code></pre></div>
+<p>For codes of job state description please use:</p>
+<div class="highlight"><pre><span></span><code>$ man squeue
+</code></pre></div>
+<p>Some of them are:  </p>
+<ul>
+<li>R  - running  </li>
+<li>PD - pending    </li>
+<li>CA - canceled  </li>
+<li>CD - completed  </li>
+<li>F  - failed  </li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../srun/" class="btn btn-neutral float-right" title="SRUN">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../connection/" class="btn btn-neutral" title="Connection to HPC Slurm"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../connection/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../srun/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
