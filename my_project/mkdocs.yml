@@ -9,8 +9,8 @@ nav:
         - pyCharm: pyCharm.md
         - Matlab: matlab.md
         - Conda Environment: conda_env.md
-        - RStudio: rstudio.md
-        - FAQ: faq.md 
+        - RStudio - SGE HPC only: rstudio.md
+        - FAQ: faq.md
         - Contact: contact.md
 theme:
   name: 'readthedocs'

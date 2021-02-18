@@ -3,7 +3,7 @@
 
 If you have any questions or problems with Slurm, please, contact:
 
-   * Inga Paster - Slurm DevOps Engineer:
+   * Inga Paster - System & DevOps Engineer:
 
       Cell phone - 052-8823-105  
       Office     - 61156  

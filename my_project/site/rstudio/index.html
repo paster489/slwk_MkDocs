@@ -9,7 +9,7 @@
   
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>RStudio - BGU HPC Slurm Cluster (Rev.0)</title>
+  <title>RStudio - SGE HPC only - BGU HPC Slurm Cluster (Rev.0)</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../css/theme.css" />
@@ -19,7 +19,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "RStudio";
+    var mkdocs_page_name = "RStudio - SGE HPC only";
     var mkdocs_page_input_path = "rstudio.md";
     var mkdocs_page_url = null;
   </script>
@@ -85,8 +85,20 @@
                     </li>
                 </ul>
                 <ul class="current">
-                    <li class="toctree-l1 current"><a class="reference internal current" href="./">RStudio</a>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">RStudio - SGE HPC only</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#open-rstuio">Open Rstuio</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#create-bash-script-with-sgejobs">Create bash script (with sgejobs)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#update-bash-script">Update bash script</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#submit-bash-script">Submit bash script</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#delete-job">Delete job</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#log-files-location">Log files location</a>
+    </li>
     </ul>
                     </li>
                 </ul>
@@ -119,7 +131,7 @@
     
       
     
-    <li>RStudio</li>
+    <li>RStudio - SGE HPC only</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -130,13 +142,111 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="rstudio-related-to-sge">RStudio (related to SGE)</h1>
-<p>Check that conda is installed</p>
-<div class="highlight"><pre><span></span><code>$ conda -V
+                <h1 id="sge-hpc-only-rstudio-and-sgejobs">SGE HPC only: RStudio and sgejobs</h1>
+<p>Sgejobs is R-program which creates bash script for job submission in HPC.
+For more details about sgejobs see the link <a href="http://research.libd.org/sgejobs/articles/basics.html">Introduction to sgejobs</a>.</p>
+<h3 id="open-rstuio">Open Rstuio</h3>
+<p>From any sge you can run the next commands:</p>
+<div class="highlight"><pre><span></span><code>$ firefox
+$ http://172.20.0.212:8787 or http://sge212:8787
 </code></pre></div>
-<p>Check that conda is up to date</p>
-<div class="highlight"><pre><span></span><code>  $ conda update conda
+<h3 id="create-bash-script-with-sgejobs">Create bash script (with sgejobs)</h3>
+<p>Create R-script which is shown below and run it in sge212 (here R-code is written in notepad, but you any other editor as well):</p>
+<div class="highlight"><pre><span></span><code>#!/usr/bin/env Rscript  
+library(&#39;sgejobs&#39;)  
+job_single(name = &lt;job-name.R&gt;, create_shell = TRUE, task_num = &lt;number-of-running&gt;)
 </code></pre></div>
+<p>For more complicated examples, please, see the link <a href="http://research.libd.org/sgejobs/articles/basics.html">Introduction to sgejobs</a>.</p>
+<p>The output of the script will be bash file <strong>&lt;job-name.R>.sh</strong> .</p>
+<h3 id="update-bash-script">Update bash script</h3>
+<p>Update <strong>&lt;job-name.R>.sh</strong> bash script with the next changes.</p>
+<p>1.Close the next lines as comments (double #):</p>
+<ul>
+<li>##$ -tc 20    </li>
+<li>##module load conda_R    </li>
+<li>##module list  </li>
+</ul>
+<p>2.Update the line after "## List current modules for reproducibility" with the next command:</p>
+<ul>
+<li>Rscript &lt;job-name.R>   </li>
+</ul>
+<p>This command "says" to bash to run &lt;job-name.R> as R-code. If you are using Python, you need to replace Rscript with Python word.
+This mode of operation allow to submit the job in batch mode and is not interactive run.
+If you need the interactive run, please contact HPC team for support.</p>
+<p>In addition, you can update the resources which are need to run your job <strong>&lt;job-name.R></strong>:</p>
+<div class="highlight"><pre><span></span><code>#!/bin/bash
+#$ -cwd
+#$ -l mem_free=10G,h_vmem=10G,h_fsize=100G
+#$ -N R_test.R
+#$ -o logs/R_test_R.$TASK_ID.txt
+#$ -e logs/R_test_R.$TASK_ID.txt
+#$ -m e
+#$ -t &lt;number-of-running&gt;
+##$ -tc 20
+
+echo &quot;**** Job starts ****&quot;
+date
+
+echo &quot;**** JHPCE info ****&quot;
+echo &quot;User: ${USER}&quot;
+echo &quot;Job id: ${JOB_ID}&quot;
+echo &quot;Job name: ${JOB_NAME}&quot;
+echo &quot;Hostname: ${HOSTNAME}&quot;
+echo &quot;Task id: ${SGE_TASK_ID}&quot;
+
+## Load the R module (absent since the JHPCE upgrade to CentOS v7)
+## module load conda_R
+
+## List current modules for reproducibility
+## module list
+
+## Edit with your job command
+Rscript &lt;job-name.R&gt;
+
+echo &quot;**** Job ends ****&quot;
+date
+
+## This script was made using sgejobs version 0.99.1
+## available from http://research.libd.org/sgejobs/
+</code></pre></div>
+<h3 id="submit-bash-script">Submit bash script</h3>
+<p>Submit &lt;job-name.R>.sh bash script using the next commands:</p>
+<table>
+<thead>
+<tr>
+<th align="left"><strong>Option</strong> <div style="width:200px"></th>
+<th align="left"><strong>Code</strong> <div style="width:300px"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">1 - without order definition</td>
+<td align="left">qsub &lt;job-name.R>.sh</td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+<tr>
+<td align="left">2 - with order definition</td>
+<td align="left">qsub &lt;job-name.R>.sh -q &lt;order-name></td>
+</tr>
+<tr>
+<td align="left"></td>
+<td align="left"></td>
+</tr>
+</tbody>
+</table>
+<p><br/></p>
+<h3 id="delete-job">Delete job</h3>
+<div class="highlight"><pre><span></span><code>qdel &lt;job-id&gt;
+</code></pre></div>
+<h3 id="log-files-location">Log files location</h3>
+<p>All error and output files are in current directory (cwd from where the bash script was submitted) -&gt; in log directory.</p>
               
             </div>
           </div>

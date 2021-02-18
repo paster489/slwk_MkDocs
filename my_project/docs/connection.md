@@ -1,3 +1,6 @@
 # Connect to HPC Slurm Cluster
 
-<ins>TBD</ins>
+sge250 aka hpcgate  
+
+
+![Screenshot](img/sge_connection.png)
