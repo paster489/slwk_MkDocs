@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Commands - BGU HPC Slurm Cluster (Rev.0)</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link href="../stylesheets/extra.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Commands";
+    var mkdocs_page_input_path = "commands.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> BGU HPC Slurm Cluster (Rev.0)</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Overview</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../connection/">Connection to HPC Slurm</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../sbatch/">SBATCH</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../srun/">SRUN</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Commands</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#jobs">Jobs</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#resources">Resources</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#limits">Limits</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#priority">Priority</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#piping">Piping</a>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../jupyter/">Jupyter</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../pyCharm/">pyCharm</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../matlab/">Matlab</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../conda_env/">Conda Environment</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../rstudio/">RStudio</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../faq/">FAQ</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../contact/">Contact</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">BGU HPC Slurm Cluster (Rev.0)</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Commands</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="commands">Commands</h1>
+<p>For the summary of Slurm commands please see the link - <a href="https://slurm.schedmd.com/pdfs/summary.pdf">summary</a>.</p>
+<h3 id="jobs">Jobs</h3>
+<p>Report status of submitted job:</p>
+<div class="highlight"><pre><span></span><code>$ squeue -l -u$USER
+or
+$ squeue -l -u&lt;user-name&gt;
+</code></pre></div>
+<p>Report status of submitted job every 60 seconds:</p>
+<div class="highlight"><pre><span></span><code>$ squeue -i60 -l -u$USER
+</code></pre></div>
+<p>Details of submitted job:  </p>
+<div class="highlight"><pre><span></span><code>$ scontrol show job &lt;job-id&gt;
+</code></pre></div>
+<p>The maximal memory used for the <em>completed</em> job:  </p>
+<div class="highlight"><pre><span></span><code>$ sacct -j &lt;job-id&gt; --format=MaxRSS
+</code></pre></div>
+<p>Maximal memory used for the <em>running</em> job:</p>
+<div class="highlight"><pre><span></span><code>$ sstat -j &lt;job-id&gt; --format=MaxRSS
+</code></pre></div>
+<p>To see all format options:  </p>
+<div class="highlight"><pre><span></span><code>$ sacct -e
+or
+$ sstat -e
+</code></pre></div>
+<p>To see when the submitted job will start:</p>
+<div class="highlight"><pre><span></span><code>$ squeue --start
+</code></pre></div>
+<p>In addition, you can use the script "jobinfo" from GitHub <a href="https://github.com/birc-aeh/slurm-utils">slurm-util</a> site for monitoring your jobs. To run the script, save it in your directory and write the command:</p>
+<div class="highlight"><pre><span></span><code>$ &lt;path-to-file&gt;/jobinfo &lt;job-id&gt;
+</code></pre></div>
+<h3 id="resources">Resources</h3>
+<p>To see cluster partitioning:</p>
+<div class="highlight"><pre><span></span><code>$ sinfo
+</code></pre></div>
+<p>More details about cluster partitioning:</p>
+<div class="highlight"><pre><span></span><code>$ sinfo -Nel
+or
+$ scontrol show partition
+</code></pre></div>
+<p>See availible GPUs:</p>
+<div class="highlight"><pre><span></span><code>$ sres
+</code></pre></div>
+<p>See Slurm account information:</p>
+<div class="highlight"><pre><span></span><code>$ sacctmgr show &lt;option&gt;
+</code></pre></div>
+<p>Options: "Account", "Association", "Cluster", "Configuration",
+"Event", "Federation", "Problem", "QOS", "Resource", "Reservation",
+"RunAwayJobs", "Stats", "Transaction", "TRES", "User", or "WCKey".<br />
+See help for details.</p>
+<h3 id="limits">Limits</h3>
+<p>See resource limit configuration:</p>
+<div class="highlight"><pre><span></span><code>$ sacctmgr show assoc_mgr
+</code></pre></div>
+<p>See the limit of tasks which user can run:</p>
+<div class="highlight"><pre><span></span><code>$ sacctmgr show qos|grep &lt;partition-name&gt;
+</code></pre></div>
+<h3 id="priority">Priority</h3>
+<p>To see how defined your QOS priority:</p>
+<div class="highlight"><pre><span></span><code>$ sacctmgr list assoc user=&lt;user-name&gt; format=Cluster,Account,User,QOS,defaultqos
+</code></pre></div>
+<p>See account and fair-share parameters:</p>
+<div class="highlight"><pre><span></span><code>$ sshare -l
+</code></pre></div>
+<p>Run the job with QOS priority privilege:</p>
+<div class="highlight"><pre><span></span><code>$ sbatch --qos=&lt;priority-user-name&gt; &lt;path-to-file&gt;/&lt;sbatch-file-name&gt;
+</code></pre></div>
+<h3 id="piping">Piping</h3>
+<p>Start job after <other-job> started:</p>
+<div class="highlight"><pre><span></span><code>$ sbatch --depend=after:&lt;other-job-id&gt; &lt;path-to-file&gt;/&lt;sbatch-file-name&gt;
+</code></pre></div>
+<p>Start job after <other-job> ends with ok status (the options can be (ok|notok|any):</p>
+<div class="highlight"><pre><span></span><code>$ sbatch --depend=afterok:&lt;other_job_id&gt; &lt;path-to-file&gt;/&lt;sbatch-file-name&gt;
+</code></pre></div>
+<p>Start after both job 77 and 79 have finished:</p>
+<div class="highlight"><pre><span></span><code>$ sbatch --depend=afterok:77:79 &lt;path-to-file&gt;/&lt;sbatch-file-name&gt;
+</code></pre></div>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../jupyter/" class="btn btn-neutral float-right" title="Jupyter">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../srun/" class="btn btn-neutral" title="SRUN"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../srun/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../jupyter/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

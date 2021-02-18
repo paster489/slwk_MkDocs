@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>FAQ - BGU HPC Slurm Cluster (Rev.0)</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  <link href="../stylesheets/extra.css" rel="stylesheet" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "FAQ";
+    var mkdocs_page_input_path = "faq.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> BGU HPC Slurm Cluster (Rev.0)</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Overview</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../connection/">Connection to HPC Slurm</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../sbatch/">SBATCH</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../srun/">SRUN</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../commands/">Commands</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../jupyter/">Jupyter</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../pyCharm/">pyCharm</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../matlab/">Matlab</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../conda_env/">Conda Environment</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../rstudio/">RStudio</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">FAQ</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#why-my-job-is-not-running">Why my job is not running?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#why-my-job-was-killed">Why my job was killed?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#why-sstat-doesnt-work">Why sstat doesn't work?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#why-sacct-doesnt-work">Why sacct doesn't work?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#what-to-choose-ntasks-or-array">What to choose --ntasks or --array?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#how-to-know-if-i-am-working-with-gpu-or-cpu">How to know if I am working with GPU or CPU?</a>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../contact/">Contact</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">BGU HPC Slurm Cluster (Rev.0)</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>FAQ</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="faq">FAQ</h1>
+<!-- blank line -->
+
+<h3 id="why-my-job-is-not-running"><strong>Why my job is not running?</strong></h3>
+<p>Use the next command to see the reason:  </p>
+<div class="highlight"><pre><span></span><code>$ scontrol show job &lt;job-id&gt;
+</code></pre></div>
+<p>The reason can be:  </p>
+<ul>
+<li>priority =&gt; resources being reserved for higher priority job.</li>
+<li>resources =&gt; required resources are in user.</li>
+<li>dependency =&gt; job dependencies not yet satisfied.</li>
+<li>reservation =&gt; waiting for advanced reservation.</li>
+<li>AssociationJobLimit =&gt; user account job limit reached.</li>
+<li>AssociationResourceLimit =&gt; user account resource limit reached.</li>
+<li>AssociationTimeLimit =&gt; user account time limit reached.</li>
+<li>QOSJobLimit =&gt; Quality Of Service (QOS) job limit reached.</li>
+<li>QOSResourceLimit =&gt; Quality Of Service (QOS) resource limit reached.</li>
+<li>QOSTimeLimit =&gt; Quality Of Service (QOS) time limit reached.</li>
+<li>Example:<br />
+<img alt="Screenshot" src="../img/job_not_run_reason_1.png" />
+  <img alt="Screenshot" src="../img/job_not_run_reason_2.png" /></li>
+</ul>
+<!-- blank line -->
+
+<h3 id="why-my-job-was-killed"><strong>Why my job was killed?</strong></h3>
+<p>Use the SBatch Flag below in your Batch File.</p>
+<div class="highlight"><pre><span></span><code>#SBATCH --requeue
+</code></pre></div>
+<!-- blank line -->
+
+<h3 id="why-sstat-doesnt-work"><strong>Why sstat doesn't work?</strong></h3>
+<ul>
+<li>sstat command need be used for the <em>running</em> job_id.</li>
+<li>for completed jobs use sacct command.</li>
+</ul>
+<!-- blank line -->
+
+<h3 id="why-sacct-doesnt-work"><strong>Why sacct doesn't work?</strong></h3>
+<ul>
+<li>sacct command need be used for the <em>completed</em> job_id.</li>
+<li>for the running jobs use sstat command.</li>
+<li>sacct  command need to run on the master node only, so to execute it it need be written in the script.  </li>
+</ul>
+<!-- blank line -->
+
+<h3 id="what-to-choose-ntasks-or-array"><strong>What to choose --ntasks or --array?</strong></h3>
+<p><img alt="Screenshot" src="../img/n_task_array_example.png" /></p>
+<!-- blank line -->
+
+<p>Let's review two schemes: in the first one we are defining one job with 8 tasks: "srun echo hello".
+In the second scheme: we reserve in Slurm one job with one task and array = 1-8. So what is the difference between these two options?  </p>
+<!-- blank line -->
+
+<p>In the Scheme 1: all the tasks will be scheduled at the <em>same time</em>.  So it will need 8 CPUS to become available at the same time. This is typically only used with parallel jobs where processes need to communicate with each others, for instance using an Message Passing Interface library.  </p>
+<!-- blank line -->
+
+<p>In the Scheme 2: the 8 tasks will be scheduled <em>independently</em> one of another. If 8 CPUs become available at once, they will all start at the same time, but if only 4 CPUs become available at first, 4 tasks will run, the other 4 remaining pending.  It is typically used in the case of embarrassingly parallel jobs, where the processes do not need to communicate or synchronize, like for applying the same program to a list of files.  </p>
+<h3 id="how-to-know-if-i-am-working-with-gpu-or-cpu"><strong>How to know if I am working with GPU or CPU?</strong></h3>
+<p>In order to test if your GPU is in use and working please run the next <a href="http://gpu.bgu.ac.il/examples/">scrip</a> from BGU ISE web site.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../contact/" class="btn btn-neutral float-right" title="Contact">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../rstudio/" class="btn btn-neutral" title="RStudio"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../rstudio/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../contact/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>

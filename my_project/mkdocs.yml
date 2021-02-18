@@ -1,0 +1,46 @@
+site_name: BGU HPC Slurm Cluster (Rev.0)
+nav:
+        - Overview: index.md
+        - Connection to HPC Slurm: connection.md
+        - SBATCH: sbatch.md
+        - SRUN: srun.md
+        - Commands: commands.md
+        - Jupyter: jupyter.md
+        - pyCharm: pyCharm.md
+        - Matlab: matlab.md
+        - Conda Environment: conda_env.md
+        - RStudio: rstudio.md
+        - FAQ: faq.md 
+        - Contact: contact.md
+theme:
+  name: 'readthedocs'
+  favicon: 'img/favicon.ico'
+
+extra_css:
+  - 'stylesheets/extra.css'
+
+markdown_extensions:
+  - pymdownx.critic:
+      mode: view
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.mark
+  - pymdownx.highlight
+  - admonition
+  - footnotes
+  - meta
+  - def_list
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.details
+  - pymdownx.emoji:
+        emoji_generator: !!python/name:pymdownx.emoji.to_png
+  - pymdownx.inlinehilite
+  - pymdownx.magiclink
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences
+  - pymdownx.tasklist
+  - pymdownx.tilde
+  - attr_list
